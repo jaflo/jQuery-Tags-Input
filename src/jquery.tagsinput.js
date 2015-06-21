@@ -101,7 +101,8 @@
                         $('<a>', {
                             href  : '#',
                             title : 'Removing tag',
-                            text  : '×'
+                            text  : '×',
+                            tabindex : '-1'
                         }).click(function () {
                             return $('#' + id).removeTag(escape(value));
                         })
@@ -239,7 +240,11 @@
 				$.fn.tagsInput.importTags($(data.real_input),$(data.real_input).val());
 			}
 			if (settings.interactive) {
-				$(data.fake_input).attr("placeholder",$(data.fake_input).attr('data-default'));
+				$(data.fake_input).attr("placeholder",$(data.fake_input).attr('data-default')).blur(function() {
+					$(this).parents(".tagsinput").removeClass("focus");
+				}).focus(function() {
+					$(this).parents(".tagsinput").addClass("focus");
+				});
 		        $(data.fake_input).resetAutosize(settings);
 
 				if (settings.autocomplete_url != undefined) {
