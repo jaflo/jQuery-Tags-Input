@@ -101,7 +101,7 @@
                         $('<a>', {
                             href  : '#',
                             title : 'Removing tag',
-                            text  : 'x'
+                            text  : '×'
                         }).click(function () {
                             return $('#' + id).removeTag(escape(value));
                         })
@@ -179,14 +179,11 @@
       interactive:true,
       defaultText:'add a tag',
       minChars:0,
-      width:'300px',
-      height:'100px',
       autocomplete: {selectFirst: false },
       hide:true,
       delimiter: ',',
       unique:true,
       removeWithBackspace:true,
-      placeholderColor:'#666666',
       autosize: true,
       comfortZone: 20,
       inputPadding: 6*2
@@ -238,28 +235,12 @@
 
 			$(markup).insertAfter(this);
 
-			$(data.holder).css('width',settings.width);
-			$(data.holder).css('min-height',settings.height);
-			$(data.holder).css('height',settings.height);
-
 			if ($(data.real_input).val()!='') {
 				$.fn.tagsInput.importTags($(data.real_input),$(data.real_input).val());
 			}
 			if (settings.interactive) {
-				$(data.fake_input).val($(data.fake_input).attr('data-default'));
-				$(data.fake_input).css('color',settings.placeholderColor);
+				$(data.fake_input).attr("placeholder",$(data.fake_input).attr('data-default'));
 		        $(data.fake_input).resetAutosize(settings);
-
-				$(data.holder).bind('click',data,function(event) {
-					$(event.data.fake_input).focus();
-				});
-
-				$(data.fake_input).bind('focus',data,function(event) {
-					if ($(event.data.fake_input).val()==$(event.data.fake_input).attr('data-default')) {
-						$(event.data.fake_input).val('');
-					}
-					$(event.data.fake_input).css('color','#000000');
-				});
 
 				if (settings.autocomplete_url != undefined) {
 					autocomplete_options = {source: settings.autocomplete_url};
@@ -282,7 +263,6 @@
 						});
 					}
 
-
 				} else {
 						// if a user tabs out of the field, create a new tag
 						// this is only available if autocomplete is not used.
@@ -292,8 +272,7 @@
 								if( (event.data.minChars <= $(event.data.fake_input).val().length) && (!event.data.maxChars || (event.data.maxChars >= $(event.data.fake_input).val().length)) )
 									$(event.data.real_input).addTag($(event.data.fake_input).val(),{focus:true,unique:(settings.unique)});
 							} else {
-								$(event.data.fake_input).val($(event.data.fake_input).attr('data-default'));
-								$(event.data.fake_input).css('color',settings.placeholderColor);
+								$(event.data.fake_input).val('');
 							}
 							return false;
 						});
@@ -320,7 +299,7 @@
 						 event.preventDefault();
 						 var last_tag = $(this).closest('.tagsinput').find('.tag:last').text();
 						 var id = $(this).attr('id').replace(/_tag$/, '');
-						 last_tag = last_tag.replace(/[\s]+x$/, '');
+						 last_tag = last_tag.replace(/[\s]+×$/, '');
 						 $('#' + id).removeTag(escape(last_tag));
 						 $(this).trigger('focus');
 					}
