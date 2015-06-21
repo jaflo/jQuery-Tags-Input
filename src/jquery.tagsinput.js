@@ -234,7 +234,10 @@
 
 			markup = markup + '</div><div class="tags_clear"></div></div>';
 
-			$(markup).insertAfter(this);
+			$(markup).insertAfter(this).on("click mousedown", function(e) {
+				$(data.fake_input).focus();
+				e.preventDefault();
+			});
 
 			if ($(data.real_input).val()!='') {
 				$.fn.tagsInput.importTags($(data.real_input),$(data.real_input).val());
