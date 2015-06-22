@@ -97,10 +97,10 @@
 
 				if (value !='' && skipTag != true) {
                     $('<span>').addClass('tag').append(
-                        $('<span>').text(value).append('&nbsp;&nbsp;'),
+                        $('<span>').text(value),
                         $('<a>', {
                             href  : '#',
-                            title : 'Removing tag',
+                            title : 'Remove tag',
                             text  : '×',
                             tabindex : '-1'
                         }).click(function () {
@@ -178,7 +178,7 @@
 	$.fn.tagsInput = function(options) {
     var settings = jQuery.extend({
       interactive:true,
-      defaultText:'add a tag',
+      defaultText:'Add tags',
       minChars:0,
       autocomplete: {selectFirst: false },
       hide:true,
